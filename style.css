@@ -1,0 +1,314 @@
+/* ==== General Reset ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #1e1f22;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #fff;
+}
+
+/* ==== Chat Container ==== */
+#chat-container {
+  background: #2b2d31;
+  width: 90%;
+  max-width: 600px;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+/* ==== Header ==== */
+#chat-header {
+  background: #1f2023;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #3c3e44;
+}
+
+/* ==== Message Box ==== */
+#messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #555 #2b2d31;
+}
+
+#messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+#messages::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+/* ==== Message ==== */
+.message {
+  background: #383b40;
+  padding: 10px 15px;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+  transition: background 0.2s;
+}
+
+.message:hover {
+  background: #43464b;
+}
+
+.message .name {
+  font-weight: 600;
+  color: #4da6ff;
+  margin-bottom: 3px;
+  display: block;
+}
+
+.message .text a {
+  color: #4da6ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.message .text a:hover {
+  color: #81c7ff;
+}
+
+/* ==== Input Section ==== */
+#input-section {
+  background: #1f2023;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-top: 1px solid #3c3e44;
+}
+
+#message-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #2b2d31;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+}
+
+#send-btn {
+  background: #4da6ff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#send-btn:hover {
+  background: #368de0;
+}
+
+.copy-btn {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: #777;
+}
+
+/* ==== Mobile ==== */
+@media (max-width: 600px) {
+  #chat-container {
+    height: 90vh;
+    width: 95%;
+  }
+}
+/* ==== Channel List ==== */
+#channel-list {
+  background: #1f2023;
+  padding: 10px;
+  border-bottom: 1px solid #3c3e44;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #555 #1f2023;
+}
+#channel-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+#channel-list::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}
+.channel-btn {
+  background: #2b2d31;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.channel-btn.active, .channel-btn:hover {
+  background: #4da6ff;
+}
+#new-channel-btn {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+#new-channel-btn:hover {
+  background: #777;
+}
+/* ==== Create Channel Modal ==== */
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+#modal {
+  background: #2b2d31;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+#modal h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+#modal input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #1f2023;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  margin-bottom: 15px;
+}   
+#modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+#modal-buttons button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+#create-channel-btn {
+  background: #4da6ff;
+  color: #fff;
+}
+#create-channel-btn:hover {
+  background: #368de0;
+}
+#cancel-btn {
+  background: #555;
+  color: #fff;
+}
+#cancel-btn:hover {
+  background: #777;
+}
+/* ==== Member List ==== */
+#member-list {
+  background: #1f2023;
+  padding: 10px;
+  border-top: 1px solid #3c3e44;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #555 #1f2023;
+}
+#member-list::-webkit-scrollbar {
+  height: 8px;
+}
+#member-list::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}
+.member {
+  background: #2b2d31;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.member:hover {
+  background: #4da6ff;
+}
+/* ==== Responsive Adjustments ==== */
+@media (max-width: 600px) {
+    #chat-container {
+        height: 90vh;
+        width: 95%;
+    }
+    #channel-list, #member-list {
+        flex-wrap: nowrap;
+    }
+    .channel-btn, .member {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+    #send-btn {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    #message-input {
+        font-size: 14px;
+    }
+    #modal {
+        width: 95%;
+    }
+}
+/* ==== End of Style ==== */

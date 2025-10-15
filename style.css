@@ -18,297 +18,236 @@ body {
 /* ==== Chat Container ==== */
 #chat-container {
   background: #2b2d31;
-  width: 90%;
-  max-width: 600px;
-  height: 80vh;
+  width: 95%;
+  max-width: 900px;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
 }
 
 /* ==== Header ==== */
 #chat-header {
   background: #1f2023;
-  padding: 15px;
-  font-size: 20px;
-  font-weight: 600;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: 700;
   text-align: center;
-  border-bottom: 1px solid #3c3e44;
+  border-bottom: 2px solid #4da6ff;
 }
 
 /* ==== Message Box ==== */
 #messages {
   flex: 1;
-  padding: 15px;
+  padding: 20px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   scrollbar-width: thin;
   scrollbar-color: #555 #2b2d31;
+  background: #1e1f22;
+  border-radius: 0 0 12px 12px;
 }
 
 #messages::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 #messages::-webkit-scrollbar-thumb {
   background-color: #555;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 /* ==== Message ==== */
 .message {
-  background: #383b40;
-  padding: 10px 15px;
-  border-radius: 8px;
-  max-width: 80%;
+  padding: 12px 18px;
+  border-radius: 20px;
+  max-width: 75%;
   word-wrap: break-word;
-  transition: background 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  font-size: 16px;
+  background: #383b40;
 }
 
 .message:hover {
-  background: #43464b;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .message .name {
-  font-weight: 600;
-  color: #4da6ff;
-  margin-bottom: 3px;
+  font-weight: 700;
+  margin-bottom: 4px;
   display: block;
 }
 
+/* Random user colors - assign dynamically via JS */
+.message.user-color {
+  color: #fff;
+}
+.message.user-color:nth-child(odd) {
+  background: #4da6ff;
+  color: #fff;
+}
+
+/* Links in messages */
 .message .text a {
   color: #4da6ff;
-  text-decoration: underline;
-  cursor: pointer;
+  text-decoration: none;
 }
 
 .message .text a:hover {
   color: #81c7ff;
 }
 
+
 /* ==== Input Section ==== */
 #input-section {
   background: #1f2023;
   display: flex;
-  gap: 10px;
-  padding: 10px;
-  border-top: 1px solid #3c3e44;
+  gap: 12px;
+  padding: 12px;
+  border-top: 2px solid #4da6ff;
 }
+
 
 #message-input {
   flex: 1;
-  padding: 10px;
+  padding: 12px 15px;
   border: none;
-  border-radius: 6px;
+  border-radius: 25px;
   background: #2b2d31;
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   outline: none;
 }
+
 
 #send-btn {
   background: #4da6ff;
   border: none;
-  padding: 10px 15px;
-  border-radius: 6px;
+  padding: 12px 20px;
+  border-radius: 25px;
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.3s, transform 0.2s;
 }
+
 
 #send-btn:hover {
   background: #368de0;
+  transform: scale(1.05);
 }
 
+
+/* Modern Button Style for channel, member, modal buttons */
+button {
+  border-radius: 25px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
+
+/* Copy button */
 .copy-btn {
   background: #555;
   color: white;
-  border: none;
-  padding: 5px 8px;
-  margin-top: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 12px;
-  transition: background 0.2s;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  transition: all 0.3s;
 }
 
 .copy-btn:hover {
   background: #777;
 }
 
+
 /* ==== Mobile ==== */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   #chat-container {
-    height: 90vh;
     width: 95%;
+    height: 95vh;
+  }
+  #send-btn, #message-input {
+    font-size: 14px;
   }
 }
-/* ==== Channel List ==== */
-#channel-list {
+
+
+/* ==== Channel List & Member List ==== */
+#channel-list, #member-list {
   background: #1f2023;
   padding: 10px;
-  border-bottom: 1px solid #3c3e44;
   display: flex;
-  gap: 10px;
+  gap: 8px;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: #555 #1f2023;
 }
-#channel-list::-webkit-scrollbar {
-  height: 8px;
+
+.channel-btn, .member {
+  background: #2b2d31;
+  color: #fff;
+  padding: 8px 14px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-#channel-list::-webkit-scrollbar-thumb {
+.channel-btn.active, .channel-btn:hover, .member:hover {
+  background: #4da6ff;
+  color: #fff;
+}
+#channel-list::-webkit-scrollbar, #member-list::-webkit-scrollbar {
+  height: 8px;
+}
+#channel-list::-webkit-scrollbar-thumb, #member-list::-webkit-scrollbar-thumb {
   background-color: #555;
   border-radius: 4px;
 }
-.channel-btn {
-  background: #2b2d31;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-  white-space: nowrap;
-}
-.channel-btn.active, .channel-btn:hover {
-  background: #4da6ff;
-}
-#new-channel-btn {
-  background: #555;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s;
-}
-#new-channel-btn:hover {
-  background: #777;
-}
-/* ==== Create Channel Modal ==== */
-#modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
+
+
+/* ==== Modal ==== */
 #modal {
   background: #2b2d31;
-  padding: 20px;
-  border-radius: 12px;
+  padding: 25px;
+  border-radius: 20px;
   width: 90%;
   max-width: 400px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
-}
-#modal h2 {
-  margin-bottom: 15px;
-  text-align: center;
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
 }
 #modal input {
   width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
+  padding: 12px 15px;
+  border-radius: 25px;
   background: #1f2023;
+  border: none;
   color: #fff;
   font-size: 15px;
   outline: none;
   margin-bottom: 15px;
-}   
-#modal-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
 }
-#modal-buttons button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s;
-}
-#create-channel-btn {
+#modal button {
+  width: 100%;
   background: #4da6ff;
   color: #fff;
+  padding: 12px 0;
+  font-size: 16px;
 }
-#create-channel-btn:hover {
+#modal button:hover {
   background: #368de0;
 }
-#cancel-btn {
-  background: #555;
-  color: #fff;
-}
-#cancel-btn:hover {
-  background: #777;
-}
-/* ==== Member List ==== */
-#member-list {
-  background: #1f2023;
-  padding: 10px;
-  border-top: 1px solid #3c3e44;
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #555 #1f2023;
-}
-#member-list::-webkit-scrollbar {
-  height: 8px;
-}
-#member-list::-webkit-scrollbar-thumb {
-  background-color: #555;
-  border-radius: 4px;
-}
-.member {
-  background: #2b2d31;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  color: #fff;
-  font-weight: 600;
-  white-space: nowrap;
-}
-.member:hover {
-  background: #4da6ff;
-}
-/* ==== Responsive Adjustments ==== */
-@media (max-width: 600px) {
-    #chat-container {
-        height: 90vh;
-        width: 95%;
-    }
-    #channel-list, #member-list {
-        flex-wrap: nowrap;
-    }
-    .channel-btn, .member {
-        padding: 6px 10px;
-        font-size: 14px;
-    }
-    #send-btn {
-        padding: 8px 10px;
-        font-size: 14px;
-    }
-    #message-input {
-        font-size: 14px;
-    }
-    #modal {
-        width: 95%;
-    }
-}
-/* ==== End of Style ==== */
+
+
+/* ==== End ==== */
+
